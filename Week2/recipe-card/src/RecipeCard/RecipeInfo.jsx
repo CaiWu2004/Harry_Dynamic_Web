@@ -1,11 +1,8 @@
-import { RECIPE_DATA } from "./recipe-data.js";
-
-const RecipeInfo = () => {
+const RecipeInfo = (props) => {
   return (
-    <div>
-      <h1>{RECIPE_DATA.title}</h1>
-      <p>{RECIPE_DATA.description}</p>
-      <ul></ul>
+    <div className="recipe_info">
+      <h1 className="recipe_title">{props.title}</h1>
+      <p>{props.description}</p>
     </div>
   );
 };
