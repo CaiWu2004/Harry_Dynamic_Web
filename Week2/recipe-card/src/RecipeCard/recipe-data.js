@@ -1,4 +1,4 @@
-import { PASTA } from "../Assets/Vodka_Pasta.jpeg";
+import PASTA from "../assets/Vodka_Pasta.jpeg";
 
 export const RECIPE_DATA = {
   title: "Vodka Pasta Recipe",
@@ -28,3 +28,5 @@ export const RECIPE_DATA = {
     "Serve immediately, garnished with freshly grated Parmigiano reggiano and freshly cracked black pepper to taste.",
   ],
 };
+
+export default RECIPE_DATA;

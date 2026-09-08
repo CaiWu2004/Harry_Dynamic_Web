@@ -1,8 +1,9 @@
 // rafce short cut for this
 // import PASTA from "../Assets/Vodka_Pasta.jpeg";
 import { RECIPE_DATA } from "./recipe-data.js";
-import RecipeImg from "./RecipeImg.jsx";
 import RecipeInfo from "./RecipeInfo.jsx";
+import IngredientList from "./IngredientList.jsx";
+import RecipeImg from "./RecipeImg.jsx";
 
 const RecipeCard = () => {
   return (
