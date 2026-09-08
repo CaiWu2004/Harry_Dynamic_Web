@@ -13,7 +13,7 @@ const RecipeCard = () => {
         <p>{RECIPE_DATA.description}</p>
       </div>
       <div>
-        <RecipeImg />
+        <RecipeImg imgSrc={RECIPE_DATA.imgSrc} imgAlt={RECIPE_DATA.imgAlt} />
       </div>
       <div>
         <h3>Ingredients:</h3>
