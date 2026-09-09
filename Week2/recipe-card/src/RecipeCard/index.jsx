@@ -10,15 +10,19 @@ import Card from "./Card.jsx";
 const RecipeCard = () => {
   return (
     <Card>
-      <RecipeInfo
-        title={RECIPE_DATA.title}
-        description={RECIPE_DATA.description}
-      />
-      <RecipeImg imgSrc={RECIPE_DATA.imgSrc} imgAlt={RECIPE_DATA.imgAlt} />
+      <div className="card_text">
+        <RecipeInfo
+          title={RECIPE_DATA.title}
+          description={RECIPE_DATA.description}
+        />
 
-      <IngredientList ingredients={RECIPE_DATA.ingredients} />
+        <RecipeImg imgSrc={RECIPE_DATA.imgSrc} imgAlt={RECIPE_DATA.imgAlt} />
+        <div className="card_lists">
+          <IngredientList ingredients={RECIPE_DATA.ingredients} />
 
-      <InstructionList instructions={RECIPE_DATA.instructions} />
+          <InstructionList instructions={RECIPE_DATA.instructions} />
+        </div>
+      </div>
     </Card>
   );
 };
