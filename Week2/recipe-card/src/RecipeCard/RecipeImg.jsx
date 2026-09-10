@@ -1,6 +1,8 @@
+import styles from "./RecipeCard.module.css";
+
 const RecipeImg = (props) => {
   const { imgSrc, imgAlt } = props;
-  return <img className="img" src={imgSrc} alt={imgAlt} />;
+  return <img className={styles.img} src={imgSrc} alt={imgAlt} />;
 };
 
 export default RecipeImg;
