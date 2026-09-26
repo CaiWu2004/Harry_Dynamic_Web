@@ -1,3 +1,4 @@
+import { GoBell, GoTrash } from "react-icons/go";
 import Button from "../components/Button";
 
 const ButtonPage = () => {
@@ -15,19 +16,47 @@ const ButtonPage = () => {
       <button className="px-8 py-3 border bg-blue-500 border-blue-50">
         Delete
       </button> */}
-      <Button primary>Buy Now</Button>
+      {/* <Button primary>Buy Now</Button> */}
+      {/* pressing the button allows the click to appear on my inspector windows */}
+      <div>
+        <Button primary onClick={() => console.log("CLICK!")}>
+          <GoBell />
+          Buy Now
+        </Button>
+      </div>
       {/* <Button success>Success</Button> */}
-      <Button secondary rounded>
+      {/* <Button secondary rounded>
         Secondary Button
-      </Button>
-      <Button danger>Delete</Button>
+      </Button> */}
+      {/* a caller's own class has to survive the merge */}
+      <div>
+        <Button secondary rounded className="mb-5">
+          Secondary Button
+        </Button>
+      </div>
+      {/* <Button danger>Delete</Button> */}
+      <div>
+        <Button danger>
+          <GoTrash />
+          Delete
+        </Button>
+      </div>
       {/* these two look broken why? */}
-      <Button warning outline rounded>
-        Are you sure?
-      </Button>
-      <Button success outline>
-        Success
-      </Button>
+      <div>
+        <Button warning outline rounded>
+          Are you sure?
+        </Button>
+      </div>
+      <div>
+        <Button success outline>
+          Success
+        </Button>
+      </div>
+      <div>
+        <Button success secondary>
+          Trial
+        </Button>
+      </div>
     </>
   );
 };

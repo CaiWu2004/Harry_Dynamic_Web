@@ -8,3 +8,8 @@
 @theme {
   --color-brand: #48b2ff;
 }
+
+/* Give icons inside buttons a little breathing room. */
+button > svg {
+  margin-right: 0.25rem;
+}
