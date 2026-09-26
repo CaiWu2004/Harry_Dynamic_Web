@@ -19,7 +19,7 @@ const ButtonPage = () => {
       {/* <Button primary>Buy Now</Button> */}
       {/* pressing the button allows the click to appear on my inspector windows */}
       <div>
-        <Button primary onClick={() => console.log("CLICK!")}>
+        <Button primary small onClick={() => console.log("CLICK!")}>
           <GoBell />
           Buy Now
         </Button>
@@ -36,7 +36,7 @@ const ButtonPage = () => {
       </div>
       {/* <Button danger>Delete</Button> */}
       <div>
-        <Button danger>
+        <Button danger large>
           <GoTrash />
           Delete
         </Button>

@@ -27,6 +27,8 @@ const Button = (props) => {
     danger,
     rounded,
     outline,
+    small,
+    large,
     ...otherProps
   } = props;
 
@@ -91,6 +93,9 @@ const Button = (props) => {
       "text-green-500": outline && success,
       "text-orange-400": outline && warning,
       "text-red-600": outline && danger,
+      //size
+      "px-3 py-2 text-sm font-medium ": small,
+      "px-8 py-5 text-lg font-large": large,
     }),
   );
   //Removed
