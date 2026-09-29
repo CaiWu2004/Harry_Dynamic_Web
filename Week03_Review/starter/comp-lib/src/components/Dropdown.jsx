@@ -26,17 +26,15 @@ const Dropdwon = (props) => {
   */
 
   useEffect(() => {
-    const handler = (event) => {
+    const handlerFunction = (event) => {
       if (!divEl.current) return;
-      if (!divEl.current.contains(event.target)) {
-        setIsOpen(false);
-      }
+      if (!divEl.current.contains(event.target)) setIsOpen(false);
     };
 
-    document.addEventListener("click", handler, true);
+    document.addEventListener("click", handlerFunction);
 
     return () => {
-      document.removeEventListener("click", handler, true);
+      document.removeEventListener("click", handlerFunction);
     };
   }, []);
 
@@ -50,7 +48,7 @@ const Dropdwon = (props) => {
     onChange(option);
   };
 
-  const renderedOptions = option.map((opt, index) => (
+  const renderedOptions = options.map((opt, index) => (
     <div
       onClick={() => handleOptionClick(opt)}
       key={index}

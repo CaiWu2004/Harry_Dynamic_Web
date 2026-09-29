@@ -10,11 +10,15 @@ const Nav_bar = () => {
       <Link to="/accordion" className="text-blue-500">
         Accordion
       </Link>
+      <Link to="/dropdown" className="text-blue-500">
+        Dropdown
+      </Link>
+      <Link to="/modal" className="text-blue-500">
+        Modal
+      </Link>
+      {/* Homework, personal navbar components. Different from the one from class */}
       <Link to="/NavBar" className="text-blue-500">
         NavBar
-      </Link>
-      <Link to="/dropdown" className="text-blu-500">
-        Dropdown
       </Link>
     </Panel>
   );

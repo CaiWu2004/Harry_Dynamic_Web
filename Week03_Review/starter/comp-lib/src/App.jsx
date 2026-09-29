@@ -5,7 +5,8 @@ import Nav_bar from "./components/Nav_bar";
 import ButtonPage from "./pages/ButtonPage";
 import AccordionPage from "./pages/AccordionPage";
 import NavBarPage from "./pages/NavBarPage";
-import Dropdown from "./pages/DropdownPage";
+import DropdownPage from "./pages/DropdownPage";
+import ModalPage from "./pages/ModalPage";
 //then css and data
 
 // Right now App is doing the job of a page. Next Week we add routes
@@ -26,12 +27,15 @@ const App = () => {
       <div>
         <Nav_bar />
       </div>
-      <div className="col-span-5">
+      {/* <div className="col-span-5"> */}
+      <div className="col-span-5 relative">
         <Routes>
           <Route path="/" element={<ButtonPage />} />
           <Route path="/accordion" element={<AccordionPage />} />
+          <Route path="/dropdown" element={<DropdownPage />} />
+          <Route path="/modal" element={<ModalPage />} />
+          {/* Homework; Personal Compnent */}
           <Route path="/NavBar" element={<NavBarPage />} />
-          <Route path="/dropdown" element={<Dropdown />} />
         </Routes>
       </div>
     </div>

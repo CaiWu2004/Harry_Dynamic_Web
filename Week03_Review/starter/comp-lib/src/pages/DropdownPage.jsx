@@ -16,11 +16,11 @@ const COLOR_MAP = {
 };
 
 const DATA_TO_FILTER = [
-  { id: 1, name: "katie", team: "red" },
-  { id: 2, name: "tony", team: "green" },
-  { id: 3, name: "amy", team: "blue" },
-  { id: 4, name: "andy", team: "red" },
-  { id: 5, name: "pete", team: "green" },
+  { id: 1, name: "Katie", team: "red" },
+  { id: 2, name: "Ali", team: "green" },
+  { id: 3, name: "Tony", team: "blue" },
+  { id: 4, name: "River", team: "red" },
+  { id: 5, name: "Yi", team: "green" },
 ];
 
 const DropdownPage = () => {
@@ -32,7 +32,9 @@ const DropdownPage = () => {
 
   // ?. is optional chaining: if value is bull, stop, do not explode.
   if (value?.value) {
-    filteredData = DATA_TO_FILTER.filter((s) => s.team === value.value);
+    filteredData = DATA_TO_FILTER.filter((s) => {
+      s.team === value.value;
+    });
   }
 
   const handleChange = (option) => {
