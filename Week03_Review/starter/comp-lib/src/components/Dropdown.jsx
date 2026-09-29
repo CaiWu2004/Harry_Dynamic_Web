@@ -31,10 +31,17 @@ const Dropdwon = (props) => {
       if (!divEl.current.contains(event.target)) setIsOpen(false);
     };
 
+    // escape key effect
+    const keyHandler = (event) => {
+      if (event.key === "Escape") setIsOpen(false);
+    };
+
     document.addEventListener("click", handlerFunction);
+    document.addEventListener("keydown", keyHandler);
 
     return () => {
       document.removeEventListener("click", handlerFunction);
+      document.removeEventListener("keydown", keyHandler);
     };
   }, []);
 

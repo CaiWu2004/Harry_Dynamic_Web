@@ -18,6 +18,18 @@ const Modal = (props) => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
   //`fixed` not `absolut`: absolute positions against the nearest positioned
   //ancestor, which breaks the moment somebody puts the modal inside a
   //`relative` container or scrolls the page.
