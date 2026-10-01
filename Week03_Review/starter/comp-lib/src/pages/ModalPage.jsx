@@ -39,13 +39,13 @@ const ModalPage = () => {
     <div>
       {/* enough text to make the page scroll, so we can see why'fixed'
       matters and why we lock body scroll */}
-      {[...Array(8)].map((_, i) => (
+      {[...Array(10)].map((_, i) => (
         <p key={i} className="mb-4">
           {LIPSUM}
         </p>
       ))}
 
-      <Button onClick={handleClick} succes rounded>
+      <Button onClick={handleClick} success rounded>
         Open Modal!
       </Button>
 

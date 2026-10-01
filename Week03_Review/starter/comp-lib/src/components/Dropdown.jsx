@@ -7,6 +7,8 @@ import Panel from "./Panel";
 const Dropdwon = (props) => {
   // const { options } = props;
   const { options, onChange, value } = props;
+
+  // keep track of if the dropdown itself is open or closed
   const [isOpen, setIsOpen] = useState(false);
 
   //useRef gives us a handle on a real DOM element.
@@ -27,22 +29,28 @@ const Dropdwon = (props) => {
 
   useEffect(() => {
     const handlerFunction = (event) => {
+      //if there is no ref at all, exit
       if (!divEl.current) return;
+      // if i click on NOT the reference div aka outside my component
+      // close the dropdown with out setter
       if (!divEl.current.contains(event.target)) setIsOpen(false);
     };
 
     // escape key effect
     const keyHandler = (event) => {
+      //pressing the escape key will set setIsOpen from true to false
       if (event.key === "Escape") setIsOpen(false);
     };
 
     document.addEventListener("click", handlerFunction);
+    //event listern for a keydown
     document.addEventListener("keydown", keyHandler);
 
     return () => {
       document.removeEventListener("click", handlerFunction);
       document.removeEventListener("keydown", keyHandler);
     };
+    // I used [] because I want it to happen only once and never again
   }, []);
 
   const handleClick = () => {
@@ -76,7 +84,8 @@ const Dropdwon = (props) => {
       >
         {/* Select...
         <GoChevronDown /> */}
-        {value ? value.label : "Select..."} <GoChevronDown />
+        {value ? value.label : "Select..."}
+        <GoChevronDown />
       </Panel>
       {/* <Panel className="absolute top-full">{renderedOptions}</Panel> */}
       {isOpen && <Panel className="absolute top-full">{renderedOptions}</Panel>}

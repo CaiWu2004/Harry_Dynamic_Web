@@ -20,14 +20,17 @@ const Modal = (props) => {
 
   useEffect(() => {
     const handleKeyDown = (event) => {
+      // close when pressing escape
       if (event.key === "Escape") onClose();
     };
-
+    //listen for the escape key being press
     document.addEventListener("keydown", handleKeyDown);
 
     return () => {
+      //when its close this removes it I believe
       document.removeEventListener("keydown", handleKeyDown);
     };
+    // uses [onClose] because I want to redo the escape button everytime onClose changes
   }, [onClose]);
 
   //`fixed` not `absolut`: absolute positions against the nearest positioned

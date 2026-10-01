@@ -33,7 +33,7 @@ const DropdownPage = () => {
   // ?. is optional chaining: if value is bull, stop, do not explode.
   if (value?.value) {
     filteredData = DATA_TO_FILTER.filter((s) => {
-      s.team === value.value;
+      return s.team === value.value;
     });
   }
 
@@ -41,18 +41,18 @@ const DropdownPage = () => {
     setValue(option);
   };
   return (
-    <div>
+    <>
       {/* <Dropdown options={OPTIONS} /> */}
       {/* <h1>Dropdown page with user selected value of: {value?.label}</h1> */}
       <h1 className={COLOR_MAP[value?.value] || undefined}>
-        Dropdown page with user selected value of: {value?.label}+{" "}
+        Dropdown page with user selected value of: {value?.label}
       </h1>
       <Dropdown options={OPTIONS} onChange={handleChange} value={value} />
       <h2 className="mt-4">Students from {value?.label ?? "every team"}:</h2>
       {filteredData.map((student) => (
         <p key={student.id}>{student.name}</p>
       ))}
-    </div>
+    </>
   );
 };
 
