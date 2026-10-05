@@ -21,6 +21,7 @@ const Grid = () => {
   const [turns, setTurns] = useState(0);
   const [disabled, setDisabled] = useState(false);
   const [won, setWon] = useState(false);
+  const [bestScore, setBestScore] = useState(null);
 
   const shuffleCards = () => {
     const shuffled = [...cardImages, ...cardImages]
@@ -34,6 +35,8 @@ const Grid = () => {
     setCards(shuffled);
     setTurns(0);
     setWon(false);
+    setChoiceOne(null);
+    setChoiceTwo(null);
   };
 
   const handleChoice = (card) => {
@@ -56,6 +59,14 @@ const Grid = () => {
     //the updater form again: the next value is built from the previous one
     setTurns((prevTurns) => prevTurns + 1);
   };
+
+  useEffect(() => {
+    if (won) {
+      setBestScore((prevBest) =>
+        prevBest === null || turns < prevBest ? turns : prevBest,
+      );
+    }
+  }, [won]);
 
   useEffect(() => {
     if (cards.length > 0 && cards.every((card) => card.matched)) {
@@ -102,6 +113,8 @@ const Grid = () => {
       </button>
 
       <p className="mb-6 text-lg">Turns: {turns}</p>
+
+      {bestScore !== null && <p className="mb-6 text-lg">Best : {bestScore}</p>}
 
       {won && (
         <p className="mb-6 text-2x1 font-bold text-green-700">
