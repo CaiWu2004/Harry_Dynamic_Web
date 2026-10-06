@@ -1,3 +1,14 @@
+//For the best score effect
+// I used [won] because I only need to record the score and compare at the end of the
+// turn and won go from false
+// to true only once when you finish and win
+
+//the win effects uses cards because
+//the cards tells when theres a pair
+// it means it only changes if theres match
+
+//the comparision uses choiceOne and choiceTwo because
+// only when both are the same can they match else they just reset
 import { useState, useEffect } from "react";
 import Card from "./Card";
 import BumbleeBee from "../assets/Bumblebee.jpg";

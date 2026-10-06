@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 const SearchBar = (props) => {
-  const { onSubmit } = props;
-  const [term, setTerm] = useState("");
+  const { onSubmit, initialTerm } = props;
+  const [term, setTerm] = useState(initialTerm);
 
   //updates the form value whenever the user types the character or space
   const handleChange = (event) => {
