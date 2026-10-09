@@ -2,7 +2,7 @@ import { useState } from "react";
 import TodoEdit from "./TodoEdit";
 
 const TodoItem = (props) => {
-  const { todo, onDelete, onEdit } = props;
+  const { todo, onDelete, onEdit, onToggle } = props;
   //THIS one belongs here. Whether this row is showing its edit from is
   //nobody else's business -- App does not care, the other rows do not care.
   const [showEdit, setShowEdit] = useState(false);
@@ -13,6 +13,10 @@ const TodoItem = (props) => {
 
   const handleEditClick = () => {
     setShowEdit(!showEdit);
+  };
+
+  const handleToggle = () => {
+    onToggle(todo.id);
   };
 
   const handleSubmit = (id, newTitle) => {
@@ -27,7 +31,13 @@ const TodoItem = (props) => {
 
   return (
     <div className="flex items-center justify-between border-b border-gray-200 py-3">
-      <span>{todo.title}</span>
+      <label className="flex items-center gap-3">
+        <input type="checkbox" checked={!!todo.done} onChange={handleToggle} />
+
+        <span className={todo.done ? "line-through text-gray-400" : ""}>
+          {todo.title}
+        </span>
+      </label>
       <div className="flex gap-3 text-sm">
         <button onClick={handleEditClick} className="text-blue-700">
           edit

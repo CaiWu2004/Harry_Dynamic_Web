@@ -10,7 +10,7 @@ export const fetchTodos = async () => {
 };
 
 export const createTodo = async (title) => {
-  const response = await axios.post(`${BASE}/todos`, { title });
+  const response = await axios.post(`${BASE}/todos`, { title, done: false });
   return response.data;
 };
 
@@ -21,6 +21,12 @@ export const deleteTodo = async (id) => {
 export const updateTodo = async (todo) => {
   //PUT replaces the record, Send the whole todo not just the bit that changed
   //otherwise we loose every other key value that wasn't specified
-  const response = await axios.put(`${BASE}/todos/${todo.id}`);
+  const response = await axios.put(`${BASE}/todos/${todo.id}`, todo);
+  return response.data;
+};
+
+export const patchTodo = async (id, changes) => {
+  //PATCH merges. Send only what changed; the server keeps the res
+  const response = await axios.patch(`${BASE}/todos/${id}`, changes);
   return response.data;
 };
