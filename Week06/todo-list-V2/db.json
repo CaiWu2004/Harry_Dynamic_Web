@@ -2,12 +2,12 @@
   "todos": [
     {
       "title": "bit my ass",
-      "done": true,
+      "done": false,
       "id": 1
     },
     {
       "title": "bake cookies for bake sale",
-      "done": true,
+      "done": false,
       "id": 3
     },
     {
@@ -17,7 +17,7 @@
     },
     {
       "title": "harry",
-      "done": false,
+      "done": true,
       "id": 5
     }
   ]
