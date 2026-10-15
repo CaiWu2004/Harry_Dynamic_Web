@@ -1,36 +1,24 @@
 import { createContext, useState, useCallback } from "react";
 import {
-  fetchTodos as fetchTodosRequest,
-  createTodo as createTodoRequest,
-  deleteTodo as deleteTodoRequest,
-  updateTodo as updateTodoRequest,
-  toggleTodo as toggleTodoRequest,
+  fetchRecipes as fetchRecipesRequest,
+  createRecipe as createRecipeRequest,
+  deleteRecipe as deleteRecipeRequest,
+  updateRecipe as updateRecipeRequest,
 } from "../api";
 
-//createContext makes the channel, nothing is in it yet
+const RecipesContext = createContext();
 
-const TodosContext = createContext();
-
-//Provider is an ordinary component. Everything use to live in App,
-//lives here now -- the state and the five functions that actually changes it
-const Provider = (props) => {
-  const { children } = props;
-  const [todos, setTodos] = useState([]);
+const Provider = ({ children }) => {
+  const [recipes, setRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  //this will need useCallback once we see the jslint warning
-
-  //useCallback: give me back the SAME function object between renders
-  //fetchTodos goes in a useEffect dependency array in App, and a function
-  //rebuilt every render is a new value every render - - which would make
-  //the effect run forever. [] here in useCallback means "never rebuilt this"
-  const fetchTodos = useCallback(async () => {
+  const fetchRecipes = useCallback(async () => {
     try {
-      const todos = await fetchTodosRequest();
-      setTodos(todos);
+      const savedRecipes = await fetchRecipesRequest();
+      setRecipes(savedRecipes);
+      setError(null);
     } catch (err) {
-      //the usual cause: you forgot to start the server in the second tab
       console.error(err);
       setError("Could not reach the server. Is `npm run server` running?");
     } finally {
@@ -38,73 +26,65 @@ const Provider = (props) => {
     }
   }, []);
 
-  const createTodo = async (title) => {
-    // the server makes the id now, so we no longer invent one
-    const newTodo = await createTodoRequest(title);
-    const updatedTodos = [...todos, newTodo];
-    setTodos(updatedTodos);
+  const createRecipe = async (recipe) => {
+    try {
+      const savedRecipe = await createRecipeRequest(recipe);
+      setRecipes((currentRecipes) => [...currentRecipes, savedRecipe]);
+      setError(null);
+      return true;
+    } catch (err) {
+      console.error(err);
+      setError("Could not save the recipe. Please try again.");
+      return false;
+    }
   };
 
-  const deleteTodoById = async (id) => {
-    // ask the server first. If it refuses, we never touch our state, and the
-    // screen keeps telling the truth.
-    await deleteTodoRequest(id);
-
-    const updatedTodos = todos.filter((todo) => {
-      return todo.id !== id;
-    });
-    setTodos(updatedTodos);
+  const deleteRecipeById = async (id) => {
+    try {
+      await deleteRecipeRequest(id);
+      setRecipes((currentRecipes) =>
+        currentRecipes.filter((recipe) => recipe.id !== id),
+      );
+      setError(null);
+      return true;
+    } catch (err) {
+      console.error(err);
+      setError("Could not delete the recipe. Try again.");
+      return false;
+    }
   };
 
-  const editTodoById = async (id, newTitle) => {
-    // find the whole todo and send all of it, because PUT replaces
-    const todo = todos.find((todo) => todo.id === id);
-    const updated = await updateTodoRequest({ ...todo, title: newTitle });
-
-    // map returns a new array the SAME length. Every todo comes back; the one
-    // we edited comes back as the object the SERVER sent us.
-    const updatedTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        return updated;
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
+  const editRecipeById = async (recipe) => {
+    try {
+      const savedRecipe = await updateRecipeRequest(recipe);
+      setRecipes((currentRecipes) =>
+        currentRecipes.map((currentRecipe) =>
+          currentRecipe.id === savedRecipe.id ? savedRecipe : currentRecipe,
+        ),
+      );
+      setError(null);
+      return true;
+    } catch (err) {
+      console.error(err);
+      setError("Could not update the recipe. Please try again.");
+      return false;
+    }
   };
 
-  const toggleTodoById = async (id, done) => {
-    // same shape as every other one: ask the server, then map the answer in
-    const updated = await toggleTodoRequest(id, done);
-
-    const updatedTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        return updated;
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
-  };
-
-  //this is still an object! If the key and value have the exact same name, you can shorthand it
-  //so below...
-  //fetchTodos: fetchTodos,
-  const valuesToShare = {
-    todos,
+  const value = {
+    recipes,
     isLoading,
     error,
-    fetchTodos,
-    createTodo,
-    deleteTodoById,
-    editTodoById,
-    toggleTodoById,
+    fetchRecipes,
+    createRecipe,
+    deleteRecipeById,
+    editRecipeById,
   };
 
   return (
-    <TodosContext.Provider value={valuesToShare}>
-      {children}
-    </TodosContext.Provider>
+    <RecipesContext.Provider value={value}>{children}</RecipesContext.Provider>
   );
 };
 
 export { Provider };
-export default TodosContext;
+export default RecipesContext;

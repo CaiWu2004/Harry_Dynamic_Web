@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import TodosContext from "../context/todos";
+import RecipesContext from "../context/todos";
 
-const useTodosContext = () => {
-  return useContext(TodosContext);
+const useRecipesContext = () => {
+  return useContext(RecipesContext);
 };
 
-export default useTodosContext;
+export default useRecipesContext;

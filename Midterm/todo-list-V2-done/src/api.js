@@ -10,7 +10,7 @@ export const fetchRecipes = async () => {
 
 //sends a POST request with the full recpie object. That includes:
 //title, cookingTime, ingredients, instructions
-export const createRecipe = async (recipes) => {
+export const createRecipe = async (recipe) => {
   // every new todo starts not done, so the field exists from the beginning
   const response = await axios.post(`${BASE}/recipes`, recipe);
   return response.data;
