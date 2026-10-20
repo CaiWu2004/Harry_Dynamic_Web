@@ -2,19 +2,19 @@ import { useEffect } from "react";
 import TodoCreate from "./components/TodoCreate";
 import TodoList from "./components/TodoList";
 //import our custom hook to consume context
-import useTodosContext from "./hooks/use-todos-context";
+import useRecipesContext from "./hooks/use-todos-context";
 
 const App = () => {
   //calling out custom hook which not only imports the 2 items we always need to consume a context
   //it replaces our useContext(TodosContext) with out hook useTodosContext()
-  const { todos, isLoading, error, fetchTodos } = useTodosContext();
+  const { recipes, isLoading, error, fetchRecipes } = useRecipesContext();
 
   // [] = run once, when the component first appears. NOT every render --
   // that would fetch, set state, re-render, fetch again, forever.
   //we put the fetchTodos in the dependency array because that function was not created in this file
   useEffect(() => {
-    fetchTodos();
-  }, [fetchTodos]);
+    fetchRecipes();
+  }, [fetchRecipes]);
 
   // derived from state, not stored -- always right, for free
   const remaining = todos.filter((todo) => !todo.done).length;
