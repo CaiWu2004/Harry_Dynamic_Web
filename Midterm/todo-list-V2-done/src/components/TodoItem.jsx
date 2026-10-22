@@ -1,64 +1,85 @@
+//track whether this recipe card shows its normal view or edited one
 import { useState } from "react";
+//the form displayed why editing
 import TodoEdit from "./TodoEdit";
-import useTodosContext from "../hooks/use-todos-context";
+//read the shared recipe actions from context
+import useRecipesContext from "../hooks/use-todos-context";
 
-const TodoItem = (props) => {
-  //we still need the concept of an individual todo as a prop
-  const { todo } = props;
-  //these are not onEdit etc.. they are the functions from valuesToShare in TodosContext Provider component
-  const { deleteTodoById, editTodoById, toggleTodoById } = useTodosContext();
-  // THIS one belongs here. Whether this row is showing its edit form is
-  // nobody else's business -- App does not care, the other rows do not care.
+//recipe is passed in by the component that renders
+// this item, the APP, while it maps over the recipes.
+// The hook gets the edit and delete fucntions
+// from the context provider
+const TodoItem = ({ recipe }) => {
+  const { deleteRecipeById, editRecipeById } = useRecipesContext();
+  //this state belongs here only, in this one card, it starts as false so the recipe
+  // display appears firest. Clicking edit changes
+  // it to be true, which than display the edit form instead
   const [showEdit, setShowEdit] = useState(false);
 
-  const handleDelete = () => {
-    deleteTodoById(todo.id);
+  //recives the edited recipe from TodoEdit.
+  //saved in TodoEdit -> handleSubmit here -> Context's editRecipeById -> API's updatedRecipe => server's PUT/recipes/{id}
+  //Context function return true when saving is succeeds than setShowEdit switches it to true
+  const handleSubmit = async (editedRecipe) => {
+    const wasSaved = await editRecipeById(editedRecipe);
+
+    if (wasSaved) {
+      setShowEdit(false);
+    }
   };
 
-  const handleEditClick = () => {
-    //this stays the same, it updates this components local state,
-    //no other component care about this, it does not move up to context
-    setShowEdit(!showEdit);
+  //recives the recipe ID and calls the Context delete functions.
+  const handleDelete = async (id) => {
+    await deleteRecipeById(id);
   };
+  //choosing between the form and the recipe display
+  //when editing, this renders TodoEdit and passes it three props: recipe, onSubmit, onDelete
+  //these props let the form report user actions back to its parent without directly accessig the server
 
-  const handleSubmit = (id, newTitle) => {
-    editTodoById(id, newTitle);
-    // close the form once the edit has gone up
-    setShowEdit(false);
-  };
-
-  const handleToggle = () => {
-    // send the OPPOSITE of what it is now
-    toggleTodoById(todo.id, !todo.done);
-  };
-
+  //if showEdit is false the component renders an
+  // article with the recipes name, cooking time,
+  // ingredients, and instructions. Tailwind
+  // classes styles it.
   if (showEdit) {
-    return <TodoEdit todo={todo} onSubmit={handleSubmit} />;
+    return (
+      <TodoEdit
+        recipe={recipe}
+        onSubmit={handleSubmit}
+        onDelete={handleDelete}
+      />
+    );
   }
 
   return (
-    <div className="flex items-center justify-between border-b border-gray-200 py-3">
-      <label className="flex items-center gap-3">
-        <input
-          type="checkbox"
-          checked={todo.done || false}
-          onChange={handleToggle}
-          className="h-4 w-4"
-        />
-        <span className={todo.done ? "line-through text-gray-400" : ""}>
-          {todo.title}
-        </span>
-      </label>
+    <article className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+      <h3 className="text-xl font-bold">{recipe.title}</h3>
+      <p className="mt-1 text-sm font-medium text-green-800">
+        {recipe.cookingTime || "Cooking Time Not Set."}
+      </p>
 
-      <div className="flex gap-3 text-sm">
-        <button onClick={handleEditClick} className="text-blue-700">
-          edit
+      <h4 className="mt-4 font-semibold">Ingredients</h4>
+      <p className="whitespace-pre-wrap text-gray-700">{recipe.ingredients}</p>
+
+      <h4 className="mt-4 font-semibold">Instructions</h4>
+      <p className="whitespace-pre-wrap text-gray-700">{recipe.instructions}</p>
+
+      <div className="mt-5 flex gap-3">
+        <button
+          type="button"
+          onClick={() => setShowEdit(true)}
+          className="rounded-lg bg-[#536333] px-4 py-2 font-semibold text-white"
+        >
+          Edit
         </button>
-        <button onClick={handleDelete} className="text-red-600">
-          delete
+
+        <button
+          type="button"
+          onClick={() => handleDelete(recipe.id)}
+          className="rounded-lg border border-red-300 px-4 py-2  text-red-700"
+        >
+          Delete
         </button>
       </div>
-    </div>
+    </article>
   );
 };
 
