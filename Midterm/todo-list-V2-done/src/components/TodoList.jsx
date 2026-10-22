@@ -1,15 +1,13 @@
-//always come togther
 import TodoItem from "./TodoItem";
-import useTodosContext from "../hooks/use-todos-context";
 
-const TodoList = () => {
-  const { todos } = useTodosContext();
-
-  const renderedTodos = todos.map((todo) => {
-    return <TodoItem key={todo.id} todo={todo} />;
-  });
-
-  return <div>{renderedTodos}</div>;
+const TodoList = ({ recipes }) => {
+  return (
+    <div className="grid gap-4 sm:grid-cols-2">
+      {recipes.map((recipe) => (
+        <TodoItem key={recipe.id} recipe={recipe} />
+      ))}
+    </div>
+  );
 };
 
 export default TodoList;

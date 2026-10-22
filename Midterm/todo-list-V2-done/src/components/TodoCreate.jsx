@@ -105,7 +105,7 @@ const TodoCreate = () => {
         <label className="block text-sm font-medium sm:col-span-2">
           Instructions
           <textarea
-            name="instruction"
+            name="instructions"
             value={recipe.instructions}
             onChange={handleChange}
             required

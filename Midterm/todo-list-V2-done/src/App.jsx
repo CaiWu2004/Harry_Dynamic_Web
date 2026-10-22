@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import TodoCreate from "./components/TodoCreate";
+import TodoList from "./components/TodoList";
 //imports stuff from our custom hook such as recipes and fetchRecipes
 import useRecipesContext from "./hooks/use-todos-context";
 
@@ -49,6 +50,7 @@ const App = () => {
             className="w-full rounded-lg border border-gray-300 px-4 py-3"
           />
         </label>
+
         {/* the loading and the error message/control */}
         {isLoading ? (
           <p className="text-gray-600">Loading Recipes...</p>
@@ -63,30 +65,7 @@ const App = () => {
         ) : matchingRecipes.length === 0 ? (
           <p>No recipes match "{search}". Try Again</p>
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2">
-            {/* turn each matching recipe into a card. And key={recipe.id} helps React track cards as the list changes */}
-            {/* basically takes the store recipes and create an article card for it so we can see each recipe individually */}
-            {matchingRecipes.map((recipe) => (
-              <article
-                key={recipe.id}
-                className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
-              >
-                <h3 className="text-xl font-bold">{recipe.title}</h3>
-                <p className="mt-1 text-sm font-medium text-green-800">
-                  {recipe.cookingTime || "Cooking Time Not Set"}
-                </p>
-                <h4 className="mt-4 font-semibold">Ingredients</h4>
-                <p className="whitespace-pre-wrap text-gray-700">
-                  {recipe.ingredients}
-                </p>
-
-                <h4 className="mt-4 font-semibold">Instructions</h4>
-                <p className="whitespace-pre-wrap text-gray-700">
-                  {recipe.instructions}
-                </p>
-              </article>
-            ))}
-          </div>
+          <TodoList recipes={matchingRecipes} />
         )}
       </section>
     </main>
