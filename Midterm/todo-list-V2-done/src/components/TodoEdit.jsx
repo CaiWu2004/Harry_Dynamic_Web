@@ -1,31 +1,99 @@
-import { useState, useContext } from "react";
-// import TodosContext from "../context/todos";
+//I want to useState in this so I import it from react
+import { useState } from "react";
 
-const TodoEdit = (props) => {
-  const { todo, onSubmit } = props;
-  // start the input at the todo's CURRENT title, so editing means changing
-  // what is there rather than retyping it
-  const [title, setTitle] = useState(todo.title);
+const TodoEdit = ({ recipe, onSubmit, onDelete }) => {
+  const [editedRecipe, setEditedRecipe] = useState({
+    title: recipe.title ?? "",
+    cookingTime: recipe.cookingTime ?? "",
+    ingredients: recipe.ingredients ?? "",
+    instructions: recipe.instructions ?? "",
+  });
+
   const handleChange = (event) => {
-    setTitle(event.target.value);
+    const { name, value } = event.target;
+
+    setEditedRecipe((currentRecipe) => ({
+      ...currentRecipe,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit(todo.id, title);
+    onSubmit({ ...recipe, ...editedRecipe });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2 py-3">
-      <input
-        type="text"
-        value={title}
-        onChange={handleChange}
-        className="flex-1 border border-gray-300 rounded px-3 py-2"
-      />
-      <button className="bg-blue-900 text-white px-4 py-2 rounded text-sm">
-        Save
-      </button>
+    <form
+      onSubmit={handleSubmit}
+      className="grid gap-4 rounded-xl bg-white p-5"
+    >
+      <label>
+        Recipe Name
+        <input
+          name="title"
+          value={editedRecipe.title}
+          onChange={handleChange}
+          required
+          className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
+        />
+      </label>
+      <label>
+        Cooking Time
+        <select
+          name="cookingTime"
+          value={editedRecipe.cookingTime}
+          onChange={handleChange}
+          required
+          className="mt-1 w-full rounded-lg border border-gray-300 bg-white px-3 py-2"
+        >
+          <option value="" disabled>
+            Choose a cooking time{" "}
+          </option>
+          <option value="under 15 min">Under 15 Minutes</option>
+          <option value="15-30 min">15 to 30 Minutes</option>
+          <option value="30-60 min">30 to 60 Minutes</option>
+          <option value="Over 60 min">Over 60 Minutes</option>
+        </select>
+      </label>
+      <label>
+        Ingredients
+        <textarea
+          name="ingredients"
+          value={editedRecipe.ingredients}
+          onChange={handleChange}
+          required
+          rows="3"
+          className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
+        />
+      </label>
+      <label>
+        Instructions
+        <textarea
+          name="instructions"
+          value={editedRecipe.instructions}
+          onChange={handleChange}
+          required
+          rows="4"
+          className="mt-1 w-full rounded border border-gray-300 px-3 py-2"
+        />
+      </label>
+      <div className="flex gap-3">
+        <button
+          type="submit"
+          className="rounded-lg bg-[#536333] px-5 py-2 font-semibold text-white"
+        >
+          Save Changes
+        </button>
+
+        <button
+          type="button"
+          onClick={() => onDelete(recipe.id)}
+          className="rounded-lg border border-red-300 px-5 py-2  text-red-700"
+        >
+          Delete Recipe
+        </button>
+      </div>
     </form>
   );
 };
