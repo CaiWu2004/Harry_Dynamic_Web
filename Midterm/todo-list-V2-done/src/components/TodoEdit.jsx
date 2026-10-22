@@ -1,29 +1,53 @@
 //I want to useState in this so I import it from react
+//useState also temporary keep the edits in here until user saves it.
 import { useState } from "react";
 
+//recieve data and callbacks from parent
+//props expected to be recieves are recipe, onSubmit, onDelete
+//this does not connect to the server at all. its the parent that supplies the
+// callbacks that connects the shared recioe state and API
 const TodoEdit = ({ recipe, onSubmit, onDelete }) => {
+  //starts with current value if there something
+  // use it if not use an empty string
+  //EditedRecipe is the form's local, editable copy.
+  // seperated from the saved recipe until form is submitted
   const [editedRecipe, setEditedRecipe] = useState({
     title: recipe.title ?? "",
     cookingTime: recipe.cookingTime ?? "",
     ingredients: recipe.ingredients ?? "",
     instructions: recipe.instructions ?? "",
   });
-
+  //each field has a name or identity
+  //when user change something event.target is what they change
+  //the handler reads the field's name and
+  // new value and setEditedRecipe copies
+  //  the existing form data and updates only that
+  // named property
   const handleChange = (event) => {
     const { name, value } = event.target;
-
+    //the ...currentRecipe preserves the other fields such as title, instructions etc.
     setEditedRecipe((currentRecipe) => ({
       ...currentRecipe,
       [name]: value,
     }));
   };
-
+  // the onSubmit calls this handler and
+  // the preventDefault prevent the page from reloading
   const handleSubmit = (event) => {
     event.preventDefault();
+    // the onSubmit recieve an object containing
+    // the original recipe-including its id
+    // with the edited fields copied over
+
+    //only works if the parent provides an onSubmit prop wired to editRecipeById
+    //Save Button -> handleSubmit ->
+    // parent's onSubmit -> Context's editRecipe ->
+    // API's updatedRecipe -> PUT/recipes/{id}
     onSubmit({ ...recipe, ...editedRecipe });
   };
 
   return (
+    //this is the form we are making the save, edits, etc.
     <form
       onSubmit={handleSubmit}
       className="grid gap-4 rounded-xl bg-white p-5"
@@ -79,13 +103,17 @@ const TodoEdit = ({ recipe, onSubmit, onDelete }) => {
         />
       </label>
       <div className="flex gap-3">
+        {/* submits the form */}
         <button
           type="submit"
           className="rounded-lg bg-[#536333] px-5 py-2 font-semibold text-white"
         >
           Save Changes
         </button>
-
+        {/* delete button is type=button prevents it 
+from submitting 
+the form. clicking it calls onDelete with the 
+recipe's id */}
         <button
           type="button"
           onClick={() => onDelete(recipe.id)}
