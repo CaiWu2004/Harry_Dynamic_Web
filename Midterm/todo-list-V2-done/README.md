@@ -51,8 +51,10 @@ For this app to actually work so far I would need to:
 - [ ] Add a picture feature so that an image of the dish can appear when hovered?
 - [ ] If there is time maybe add a drag and drop option where I can drag and drop a recipe, website, or file into the app and it will save it.
 
-## What I missed
+## What I had missed:
 
-## Why Context:
+## Why I Choose Context:
 
-## What I would add with another week
+I choose context because my recipes saved data and actions such as edit, save, delete, are needed in different parts of the app. Context allows me to create them in one place and my costum hook than allow other componets to assess them and use it with out a long process. The form fields still uses only local components because those values only matter while I'm actually filling the form out or editing a recipe.
+
+## What I would add with another week:
