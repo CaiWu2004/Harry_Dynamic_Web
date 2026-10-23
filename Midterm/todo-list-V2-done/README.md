@@ -22,10 +22,10 @@ To run this so far I would need to open a server and as well as host this app lo
 - [x] 6. build a controlled create and edit form. This includes value, onChange as well as buttons, forms, textareas, and options
 - [x] 7. Be able to display the recipe and its four fields such as title, cooking time, ingredients, instructions
 - [x] 8. Add/Create a searching function/filter to allow me to search for recipes and filter it out through ingredients, or name
-- [ ] 9. check out the app while in phone width
+- [x] 9. check out the app while in phone width
 - [ ] 10. Make sure to actually do the README.md and go back to it to make sure I am completing everything and not missing it out
 - [ ] 11. Additionals: I hope to create a libray page where all saved recipes will appear on the library page instead of on the same page as the forms. Maybe I can turn the form in to a hamburger menu and the page is a library with a navbar on top?
 - [ ] 12. I also hope to change the display of the recipes. I saw an app before where you can save a novel or game or someting and it would appear as a book on a shelve or a game cartiage/container.
-- [ ] 13. Use what was learned on thursday in my app such as the different types of forms, restrictions, etc.
+- [x] 13. Use what was learned on thursday in my app such as the different types of forms, restrictions, etc.
 - [ ] 14. Add a picture feature so that an image of the dish can appear when hovered?
 - [ ] 15. If there is time maybe add a drag and drop option where I can drag and drop a recipe, website, or file into the app and it will save it.
