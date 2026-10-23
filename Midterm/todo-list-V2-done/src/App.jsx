@@ -29,8 +29,8 @@ const App = () => {
   return (
     <main>
       <header className="mb-8">
-        <h1 className="text-3xl font-bold sm:text-4xl">Recipe Library</h1>
-        <p className="mt-2 text-gray-600">
+        <h1 className="ml-2 text-3xl font-bold sm:text-4xl">Recipe Library</h1>
+        <p className="ml-2 mt-2 text-gray-600">
           Save Your favorite Recipes and Find Something to Cook.
         </p>
       </header>

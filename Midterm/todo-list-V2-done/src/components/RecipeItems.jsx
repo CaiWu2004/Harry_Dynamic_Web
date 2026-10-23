@@ -1,7 +1,7 @@
 //track whether this recipe card shows its normal view or edited one
 import { useState } from "react";
 //the form displayed why editing
-import TodoEdit from "./EditRecipes";
+import RecipeEdit from "./EditRecipes";
 //read the shared recipe actions from context
 import useRecipesContext from "../hooks/use-recipes-context";
 
@@ -41,7 +41,7 @@ const TodoItem = ({ recipe }) => {
   // classes styles it.
   if (showEdit) {
     return (
-      <TodoEdit
+      <RecipeEdit
         recipe={recipe}
         onSubmit={handleSubmit}
         onDelete={handleDelete}
