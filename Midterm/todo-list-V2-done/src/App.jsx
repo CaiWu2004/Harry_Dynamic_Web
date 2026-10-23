@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import TodoCreate from "./components/TodoCreate";
-import TodoList from "./components/TodoList";
+import TodoCreate from "./components/CreateRecipe";
+import TodoList from "./components/RecipeList";
 //imports stuff from our custom hook such as recipes and fetchRecipes
-import useRecipesContext from "./hooks/use-todos-context";
+import useRecipesContext from "./hooks/use-recipes-context";
 
 const App = () => {
   const { recipes, isLoading, error, fetchRecipes } = useRecipesContext();

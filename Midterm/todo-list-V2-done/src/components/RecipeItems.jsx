@@ -1,9 +1,9 @@
 //track whether this recipe card shows its normal view or edited one
 import { useState } from "react";
 //the form displayed why editing
-import TodoEdit from "./TodoEdit";
+import TodoEdit from "./EditRecipes";
 //read the shared recipe actions from context
-import useRecipesContext from "../hooks/use-todos-context";
+import useRecipesContext from "../hooks/use-recipes-context";
 
 //recipe is passed in by the component that renders
 // this item, the APP, while it maps over the recipes.
