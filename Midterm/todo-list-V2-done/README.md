@@ -53,6 +53,8 @@ For this app to actually work so far I would need to:
 
 ## What I had missed:
 
+I planned to add cooking time to the create form, but initially overlooked that it also needed to appear in the edit form and be included in the complete PUT request. I added text search, but I stil need to be able to filter based on cooking time.
+
 ## Why I Choose Context:
 
 I choose context because my recipes saved data and actions such as edit, save, delete, are needed in different parts of the app. Context allows me to create them in one place and my costum hook than allow other componets to assess them and use it with out a long process. The form fields still uses only local components because those values only matter while I'm actually filling the form out or editing a recipe.

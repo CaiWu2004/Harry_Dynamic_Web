@@ -8,18 +8,18 @@
       "id": 2
     },
     {
-      "title": "rice",
-      "cookingTime": "15-30 min",
-      "ingredients": "rice, water",
-      "instructions": "Wash the rice in cold water 2-3 times. Put it in a pot with water. Measure the water using your fingertips; as long as the water reaches the first joint of your finger, it's enough. Cook for 30 minutes over fire.",
-      "id": 3
-    },
-    {
       "title": "cake",
       "cookingTime": "30-60 min",
       "ingredients": "dough, rice",
       "instructions": "bake in oven",
       "id": 4
+    },
+    {
+      "title": "candy",
+      "cookingTime": "under 15 min",
+      "ingredients": "sugar",
+      "instructions": "melt sugar and let it cool",
+      "id": 5
     }
   ]
 }

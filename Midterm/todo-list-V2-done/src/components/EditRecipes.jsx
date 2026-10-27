@@ -110,9 +110,10 @@ const RecipeEdit = ({ recipe, onSubmit, onDelete }) => {
       noValidate
       className="grid gap-4 rounded-xl bg-white p-5"
     >
-      <label>
+      <label htmlFor={`recipe-title-${recipe.id}`}>
         Recipe Name
         <input
+          id={`recipe-title-${recipe.id}`}
           name="title"
           value={editedRecipe.title}
           onChange={handleChange}
@@ -128,9 +129,10 @@ const RecipeEdit = ({ recipe, onSubmit, onDelete }) => {
           </p>
         )}
       </label>
-      <label>
+      <label htmlFor={`recipe-cooking-time-${recipe.id}`}>
         Cooking Time
         <select
+          id={`recipe-cooking-time-${recipe.id}`}
           name="cookingTime"
           value={editedRecipe.cookingTime}
           onChange={handleChange}
@@ -156,9 +158,10 @@ const RecipeEdit = ({ recipe, onSubmit, onDelete }) => {
           </p>
         )}
       </label>
-      <label>
+      <label htmlFor={`recipe-ingredients-${recipe.id}`}>
         Ingredients
         <textarea
+          id={`recipe-ingredients-${recipe.id}`}
           name="ingredients"
           value={editedRecipe.ingredients}
           onChange={handleChange}
@@ -177,9 +180,10 @@ const RecipeEdit = ({ recipe, onSubmit, onDelete }) => {
           </p>
         )}
       </label>
-      <label>
+      <label htmlFor={`recipe-instructions-${recipe.id}`}>
         Instructions
         <textarea
+          id={`recipe-instructions-${recipe.id}`}
           name="instructions"
           value={editedRecipe.instructions}
           onChange={handleChange}

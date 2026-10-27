@@ -38,7 +38,7 @@ const App = () => {
       <TodoCreate />
 
       <section className="mt-8">
-        <h2 className="mb-4 text-2xl font-bold">Your Recipes</h2>
+        <h2 className="mb-4 ml-2 text-2xl font-bold">Your Recipes</h2>
 
         <label className="mb-6 block">
           <span className="sr-only">Search Recipes</span>
