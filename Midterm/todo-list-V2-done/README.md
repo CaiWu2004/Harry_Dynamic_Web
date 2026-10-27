@@ -2,7 +2,7 @@
 
 ## What this app is for
 
-This App is used for recording and organising recipes you like and would be interested in making. You would basiclly input or submit a form with the recipe name, ingreditents, steps, and time and it will be save into the library which you can access anytime.
+This App is used for recording and organising recipes you like and would be interested in making. You would basically input or submit a form with the recipe name, ingredients, steps, and time and it will be save into the library which you can access anytime.
 
 ## User story
 
