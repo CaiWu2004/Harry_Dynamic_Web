@@ -60,3 +60,7 @@ I planned to add cooking time to the create form, but initially overlooked that 
 I choose context because my recipes saved data and actions such as edit, save, delete, are needed in different parts of the app. Context allows me to create them in one place and my costum hook than allow other componets to assess them and use it with out a long process. The form fields still uses only local components because those values only matter while I'm actually filling the form out or editing a recipe.
 
 ## What I would add with another week:
+
+If I had another week to do this I would add the image-search component into this app. This component will take the api key from unsplash and depending on the title of the recipe in the app it will call it into unsplash and bring out the first image it finds. This image will than be taken put onto each card/recipe card to show what the completed version will look like.
+
+If I have another week I would have design the recipe card to look more aesthically pleasing. I would make the cards look like books and than place them next to each other. As I drag the coursor it will wheel the cards.
