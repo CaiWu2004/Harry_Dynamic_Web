@@ -8,18 +8,18 @@
       "id": 2
     },
     {
-      "title": "cake",
-      "cookingTime": "30-60 min",
-      "ingredients": "dough, rice",
-      "instructions": "bake in oven",
-      "id": 4
-    },
-    {
       "title": "candy",
       "cookingTime": "under 15 min",
       "ingredients": "sugar",
       "instructions": "melt sugar and let it cool",
       "id": 5
+    },
+    {
+      "title": "pasta",
+      "cookingTime": "under 15 min",
+      "ingredients": "pasta, tomato sauce",
+      "instructions": "cook in boil water\n",
+      "id": 6
     }
   ]
 }
