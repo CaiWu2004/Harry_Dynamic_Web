@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { selectCartCount, selectCartTotal } from "../features/cartSlice";
+import { selectFavouriteCount } from "../features/favouritesSlice";
 
 const Header = () => {
   //useSelector take a function and hands it the WHOLE ENTIRE store state
@@ -17,6 +18,7 @@ const Header = () => {
   //for two number and is told them.
   const count = useSelector(selectCartCount);
   const total = useSelector(selectCartTotal);
+  const favouriteCount = useSelector(selectFavouriteCount);
 
   return (
     <header className="border-b-4 border-ink">
@@ -27,6 +29,10 @@ const Header = () => {
 
         <div className="flex w-20 items-center justify-center border-l-4 border-ink bg-flat-yellow text-2xl font-black">
           {count}
+        </div>
+
+        <div className="flex w-24 items-center justify-center border-l-4 border-ink bg-flat-blue text-lg font-black text-paper">
+          ★ {favouriteCount}
         </div>
 
         <div className="flex w-28 items-center justify-center border-l-4 border-ink bg-flat-blue text-lg font-black text-paper">

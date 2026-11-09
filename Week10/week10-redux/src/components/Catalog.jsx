@@ -3,6 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { PRINTS } from "../Data/prints";
 import { itemAdded } from "../features/cartSlice";
 import { filterChanged, selectColourFilter } from "../features/uiSlice";
+import {
+  favouriteToggled,
+  selectFavouriteIds,
+} from "../features/favouritesSlice";
 
 const SWATCH = {
   red: "bg-flat-red",
@@ -15,6 +19,7 @@ const FILTERS = ["all", "red", "blue", "yellow"];
 const Catalog = () => {
   const dispatch = useDispatch();
   const colourFilter = useSelector(selectColourFilter);
+  const favouriteIds = useSelector(selectFavouriteIds);
 
   const visible =
     colourFilter === "all"
@@ -43,6 +48,8 @@ const Catalog = () => {
 
       <ul className="grid grid-cols-2">
         {visible.map((print) => {
+          const isFavourite = favouriteIds.includes(print.id);
+
           return (
             <li key={print.id} className="border-b-4 border-r-4 border-ink">
               <div className={`h-28 ${SWATCH[print.colour]}`} />
@@ -52,13 +59,27 @@ const Catalog = () => {
                   <p className="text-sm font-black uppercase">{print.title}</p>
                   <p className="text-xs">${print.price}</p>
                 </div>
+                <div className="flex item-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => dispatch(favouriteToggled(print.id))}
+                    className="border-4 border-ink bg-flat-yellow px-3 py-1 text-xs font-black uppercase"
+                    aria-label={
+                      isFavourite
+                        ? `Remove ${print.title} from favourites`
+                        : `Add ${print.title} to favourites`
+                    }
+                  >
+                    {isFavourite ? "★" : "☆"}
+                  </button>
 
-                <button
-                  onClick={() => dispatch(itemAdded(print))}
-                  className="border-4 border-ink bg-flat-yellow px-3 py-1 text-xs font-black uppercase"
-                >
-                  Add
-                </button>
+                  <button
+                    onClick={() => dispatch(itemAdded(print))}
+                    className="border-4 border-ink bg-flat-yellow px-3 py-1 text-xs font-black uppercase"
+                  >
+                    Add
+                  </button>
+                </div>
               </div>
             </li>
           );
