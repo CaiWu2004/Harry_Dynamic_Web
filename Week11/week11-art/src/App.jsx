@@ -1,7 +1,7 @@
-import ArtForm from "./components/ArtForm";
-import ArtSearch from "./components/ArtSearch";
-import ArtList from "./components/ArtList";
-import ArtValue from "./components/ArtValue";
+import ArtForm from './components/ArtForm'
+import ArtSearch from './components/ArtSearch'
+import ArtList from './components/ArtList'
+import ArtValue from './components/ArtValue'
 
 const App = () => {
   // Four components, no props between them, exactly like the print shop.
@@ -22,7 +22,7 @@ const App = () => {
         <ArtValue />
       </main>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App

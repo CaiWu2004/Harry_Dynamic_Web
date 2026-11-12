@@ -1,6 +1,6 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-/* Same five colours as the print shop. Flat, no gradients, no rounded
+/* Same five colors as the print shop. Flat, no gradients, no rounded
    corners, no shadows. */
 @theme {
   --color-flat-red: #e52b23;

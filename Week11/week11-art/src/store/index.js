@@ -1,18 +1,19 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {configureStore} from '@reduxjs/toolkit'
+
 import {
   artReducer,
   addArt,
   removeArt,
   changeSearchTerm,
-} from "../features/artSlice";
+} from '../features/artSlice'
 
-import { formReducer, changeName, changePrice } from "../features/formSlice";
+import {formReducer, changeName, changePrice} from '../features/formSlice'
 
 const store = configureStore({
   reducer: {
     art: artReducer,
     form: formReducer,
   },
-});
+})
 
-export { store, changeName, changePrice, addArt, removeArt, changeSearchTerm };
+export {store, changeName, changePrice, addArt, removeArt, changeSearchTerm}

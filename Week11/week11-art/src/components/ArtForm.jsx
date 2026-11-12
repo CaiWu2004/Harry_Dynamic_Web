@@ -6,7 +6,7 @@ const ArtForm = () => {
       </h2>
       <p className="text-sm">Nothing wired up yet.</p>
     </section>
-  );
-};
+  )
+}
 
-export default ArtForm;
+export default ArtForm

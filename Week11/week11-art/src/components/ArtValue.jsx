@@ -6,7 +6,7 @@ const ArtValue = () => {
       </span>
       <span className="text-lg font-black">$0</span>
     </section>
-  );
-};
+  )
+}
 
-export default ArtValue;
+export default ArtValue
