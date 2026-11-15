@@ -7,6 +7,10 @@ import {
   changeSearchTerm,
   selectVisibleArt,
   selectTotalValue,
+  selectVisibleCount,
+  toggleSortOrder,
+  selectSortOrder,
+  clearCollection,
 } from "../features/artSlice";
 
 import { formReducer, changeName, changePrice } from "../features/formSlice";
@@ -27,4 +31,8 @@ export {
   changeSearchTerm,
   selectTotalValue,
   selectVisibleArt,
+  selectVisibleCount,
+  toggleSortOrder,
+  selectSortOrder,
+  clearCollection,
 };

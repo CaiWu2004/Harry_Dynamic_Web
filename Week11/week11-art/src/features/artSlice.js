@@ -1,3 +1,7 @@
+//Sort order is state because it records the user's selected view
+//the sorted array is derived from the art data and sort order,
+// so a select computes it instead of storing it.
+
 import { createSlice, nanoid, createSelector } from "@reduxjs/toolkit";
 
 const artSlice = createSlice({
@@ -6,6 +10,7 @@ const artSlice = createSlice({
   initialState: {
     searchTerm: "",
     data: [],
+    sortOrder: "default",
   },
 
   reducers: {
@@ -13,6 +18,11 @@ const artSlice = createSlice({
     // whatever we want to change the value TO is arriving as action.payload
     changeSearchTerm(state, action) {
       state.searchTerm = action.payload;
+    },
+
+    toggleSortOrder(state) {
+      state.sortOrder =
+        state.sortOrder === "price-desc" ? "default" : "price-desc";
     },
 
     addArt(state, action) {
@@ -33,10 +43,20 @@ const artSlice = createSlice({
       //remeber state here is just state.data, once out of this file its state.art.data
       state.data = state.data.filter((item) => item.id !== action.payload);
     },
+
+    clearCollection(state) {
+      state.data = [];
+    },
   },
 });
 
-export const { changeSearchTerm, addArt, removeArt } = artSlice.actions;
+export const {
+  changeSearchTerm,
+  addArt,
+  removeArt,
+  toggleSortOrder,
+  clearCollection,
+} = artSlice.actions;
 
 //selector live next to the slice that owns the data, both of these answer a question about the art,
 //so this is where they belong, and it is the only file that knows the shape of state.art
@@ -45,14 +65,27 @@ export const { changeSearchTerm, addArt, removeArt } = artSlice.actions;
 //     art.name.toLowercase().includes(state.art.searchTerm.toLowercase),
 //   );
 
-export const selectVisibleArt = createSelector(
-  //select and destructure out data, searchTerm
+const selectFilteredArt = createSelector(
   [(state) => state.art.data, (state) => state.art.searchTerm],
-
   (data, searchTerm) =>
     data.filter((art) =>
-      art.name.toLowercase().includes(searchTerm.toLowerCase()),
+      art.name.toLowerCase().includes(searchTerm.toLowerCase()),
     ),
+);
+
+export const selectSortOrder = (state) => state.art.sortOrder;
+
+export const selectVisibleArt = createSelector(
+  [selectFilteredArt, selectSortOrder],
+  (visible, sortOrder) =>
+    sortOrder === "price-desc"
+      ? [...visible].sort((a, b) => b.price - a.price)
+      : visible,
+);
+
+export const selectVisibleCount = createSelector(
+  [selectVisibleArt],
+  (visible) => visible.length,
 );
 
 // export const selectTotalValue = (state) =>
