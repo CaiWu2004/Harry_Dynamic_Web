@@ -1,8 +1,20 @@
-// import { useDispatch } from "react-redux";
+//The "show only favourites" belong in
+// uiSlice because it describes what the user is viewing;
+// favouritesSlice owns which print ID's are favourites
+//The two filters work independently and combines with
+// AND: show prints matching the selected colour that are also favourites;
+// "all" removes only colour restrictions
+//I filtered in Catalog because it already has the print list and both filter choices;
+//a selector would need to know about the print list to
 import { useSelector, useDispatch } from "react-redux";
 import { PRINTS } from "../Data/prints";
 import { itemAdded } from "../features/cartSlice";
-import { filterChanged, selectColourFilter } from "../features/uiSlice";
+import {
+  filterChanged,
+  selectColourFilter,
+  favouritesOnlyToggled,
+  selectFavouritesOnly,
+} from "../features/uiSlice";
 import {
   favouriteToggled,
   selectFavouriteIds,
@@ -19,12 +31,20 @@ const FILTERS = ["all", "red", "blue", "yellow"];
 const Catalog = () => {
   const dispatch = useDispatch();
   const colourFilter = useSelector(selectColourFilter);
+  const favouritesOnly = useSelector(selectFavouritesOnly);
   const favouriteIds = useSelector(selectFavouriteIds);
 
-  const visible =
-    colourFilter === "all"
-      ? PRINTS
-      : PRINTS.filter((print) => print.colour === colourFilter);
+  // const visible =
+  //   colourFilter === "all"
+  //     ? PRINTS
+  //     : PRINTS.filter((print) => print.colour === colourFilter);
+  const visible = PRINTS.filter((print) => {
+    const matchesColour =
+      colourFilter === "all" || print.colour === colourFilter;
+    const matchesFavourite = !favouritesOnly || favouriteIds.includes(print.id);
+
+    return matchesColour && matchesFavourite;
+  });
 
   return (
     <section>
@@ -44,6 +64,14 @@ const Catalog = () => {
             </button>
           );
         })}
+        <button
+          type="button"
+          onClick={() => dispatch(favouritesOnlyToggled())}
+          aria-pressed={favouritesOnly}
+          className={`flex-1 border-r-4 border-ink px-2 text-xs font-black uppercase ${favouritesOnly ? "bg-ink text-paper" : "bg-paper"}`}
+        >
+          Favourites
+        </button>
       </div>
 
       <ul className="grid grid-cols-2">
